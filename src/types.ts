@@ -15,20 +15,98 @@ export interface Dataset {
 
 export type StepType =
   | 'source'
+  | 'source_csv'
+  | 'source_excel'
+  | 'source_json'
+  | 'source_parquet'
+  | 'source_database'
+  | 'source_api'
+  | 'source_sql'
+  | 'source_google_sheet'
+  | 'source_manual_table'
   | 'rename_column'
   | 'change_type'
-  | 'filter_rows'
+  | 'cast_to_string'
+  | 'cast_to_number'
+  | 'cast_to_boolean'
+  | 'trim_whitespace'
+  | 'normalize_case'
+  | 'lower_case'
+  | 'upper_case'
+  | 'title_case'
+  | 'capitalize'
+  | 'text_length'
+  | 'replace_text'
+  | 'regex_extract'
+  | 'regex_replace'
+  | 'split_column'
+  | 'substring'
+  | 'concat_columns'
+  | 'merge_columns'
   | 'drop_column'
-  | 'add_column'
-  | 'group_by'
-  | 'sort_rows'
+  | 'drop_nulls'
+  | 'fill_missing'
   | 'drop_duplicates'
-  | 'fillna'
-  | 'slice_rows'
+  | 'remove_duplicates'
+  | 'filter_rows'
+  | 'filter_between'
+  | 'filter_equals'
+  | 'filter_not_equals'
+  | 'filter_contains'
+  | 'filter_not_contains'
+  | 'filter_is_null'
+  | 'filter_is_not_null'
+  | 'filter_in_list'
+  | 'filter_not_in_list'
+  | 'if_else'
+  | 'add_column'
+  | 'add_columns'
+  | 'multiply_columns'
+  | 'divide_columns'
+  | 'percentage_of'
+  | 'abs_value'
+  | 'round_number'
+  | 'floor_value'
+  | 'ceil_value'
+  | 'cumulative_sum'
+  | 'running_total'
+  | 'parse_date'
+  | 'format_date'
+  | 'add_days'
+  | 'add_months'
+  | 'add_years'
+  | 'date_difference'
+  | 'extract_year'
+  | 'extract_month'
+  | 'extract_day'
+  | 'group_by'
+  | 'aggregate_sum'
+  | 'aggregate_mean'
+  | 'aggregate_min'
+  | 'aggregate_max'
+  | 'aggregate_count'
+  | 'aggregate_median'
+  | 'aggregate_unique_count'
+  | 'sort_rows'
   | 'join_dataset'
+  | 'join_left'
+  | 'join_inner'
+  | 'join_right'
+  | 'join_outer'
+  | 'lookup_value'
+  | 'top_n'
+  | 'bottom_n'
   | 'pivot'
   | 'unpivot'
-  | 'custom_code';
+  | 'reorder_columns'
+  | 'transpose'
+  | 'custom_code'
+  | 'custom_sql'
+  | 'ai_classify_text'
+  | 'ai_extract_entity'
+  | 'ai_translate_text'
+  | 'ai_summarize_text'
+  | 'semantic_join';
 
 export interface SourceParams {
   datasetId: string;
@@ -62,7 +140,7 @@ export interface AddColumnParams {
   operator?: '+' | '-' | '*' | '/' | 'concat';
   colB?: string;
   constantValue?: string;
-  customExpression?: string; // Python formula like ColA * 10
+  customExpression?: string;
 }
 
 export interface GroupByParams {
@@ -78,7 +156,7 @@ export interface SortRowsParams {
 }
 
 export interface DropDuplicatesParams {
-  columns: string[]; // empty means all columns
+  columns: string[];
 }
 
 export interface FillNaParams {
@@ -146,12 +224,12 @@ export interface AppliedStep {
   type: StepType;
   label: string;
   description: string;
-  params: any; // specific params for the type
+  params: any;
   position?: NodePosition;
   externalNodePosition?: NodePosition;
 }
 
 export interface ETLState {
   steps: AppliedStep[];
-  activeStepId: string; // The step currently selected/inspected
+  activeStepId: string;
 }
