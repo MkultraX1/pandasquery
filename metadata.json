@@ -1,0 +1,6 @@
+{
+  "name": "Pandas Query",
+  "description": "Uma interface visual de ETL estilo Power Query que gera código Python/Pandas em tempo real, permitindo transição entre tabelas interativas e fluxo de nós (nodes).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
